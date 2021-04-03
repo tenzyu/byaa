@@ -20,7 +20,6 @@ class Twitch(Cog):
             after.activities = ("dummy",)
         if before.activities is None:
             before.activities = ("dummy",)
-        guild = self.bot.get_guild(const.GUILD_ID)
         ch_twitch = self.bot.get_channel(const.CH_TWITCH)
         # 後が配信中
         if any(
@@ -48,8 +47,14 @@ class Twitch(Cog):
                     allowed_mentions=AllowedMentions.none(),
                 )
                 return
-            return
-        return
+        else:
+            if not any(
+                [
+                    isinstance(before_activity, Streaming)
+                    for before_activity in before.activities
+                ]
+            ):
+                return
 
 
 def setup(bot: Bot):
