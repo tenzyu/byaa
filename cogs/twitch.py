@@ -47,14 +47,6 @@ class Twitch(Cog):
                     allowed_mentions=AllowedMentions.none(),
                 )
                 return
-        else:
-            if not any(
-                [
-                    isinstance(before_activity, Streaming)
-                    for before_activity in before.activities
-                ]
-            ):
-                return
 
 
 def setup(bot: Bot):
